@@ -2,9 +2,6 @@ trigger:
 - main
 
 variables:
-  resourceGroupName: 'DNS_ZONE_RG1'
-  location: 'East Asia'
-  aksClusterName: 'myAKSCluster'
   dnsZoneName: 'rgazuredns1.com'
   dnsZoneResourceGroup: 'DNS_ZONE_RG'
   clientId: '87003e51-60ad-4d85-8e01-98fb98c6b713'
@@ -24,8 +21,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az group create --name $(resourceGroupName) --location $(location)
-          az deployment group create --resource-group $(resourceGroupName) --template-file main.bicep --parameters aksClusterName=$(aksClusterName) dnsZoneName=$(dnsZoneName) dnsZoneResourceGroup=$(dnsZoneResourceGroup) clientId=$(clientId) clientSecret=$(clientSecret) sshRSAPublicKey=$(sshRSAPublicKey)
-
+          az deployment group create --resource-group $(resourceGroupName) --template-file main.bicep --parameters @parameters.json
 - stage: DeployExternalDNS
   dependsOn: DeployInfrastructure
   jobs:
