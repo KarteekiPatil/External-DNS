@@ -1,0 +1,61 @@
+trigger:
+- main
+
+variables:
+  resourceGroupName: 'DNS_ZONE_RG1'
+  location: 'East Asia'
+  aksClusterName: 'myAKSCluster'
+  dnsZoneName: 'rgazuredns1.com'
+  dnsZoneResourceGroup: 'DNS_ZONE_RG'
+  clientId: '87003e51-60ad-4d85-8e01-98fb98c6b713'
+  azureSubscription: '22ebdf17-ad01-4f71-a895-cb078a581d15'
+
+stages:
+- stage: DeployInfrastructure
+  jobs:
+  - job: DeployResources
+    pool:
+		name: 'Default'
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Azure-Demo'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az group create --name $(resourceGroupName) --location $(location)
+          az deployment group create --resource-group $(resourceGroupName) --template-file main.bicep --parameters aksClusterName=$(aksClusterName) dnsZoneName=$(dnsZoneName) dnsZoneResourceGroup=$(dnsZoneResourceGroup) clientId=$(clientId) clientSecret=$(clientSecret) sshRSAPublicKey=$(sshRSAPublicKey)
+
+- stage: DeployExternalDNS
+  dependsOn: DeployInfrastructure
+  jobs:
+  - job: InstallExternalDNS
+    pool:
+		name: 'Default'
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription:'Azure-Demo'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          # Get AKS credentials
+          az aks get-credentials --resource-group $(resourceGroupName) --name $(aksClusterName)
+
+          # Install Helm
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+          # Add the Bitnami repo
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo update
+
+          # Install External DNS
+          helm install external-dns-demo12 bitnami/external-dns \
+            --set provider=azure \
+            --set azure.resourceGroup=$(dnsZoneResourceGroup) \
+            --set azure.subscriptionId=$(subscriptionId) \
+            --set azure.tenantId=$(tenantId) \
+            --set azure.clientId=$(clientId) \
+            --set azure.clientSecret=$(clientSecret) \
+            --set domainFilters[0]=$(dnsZoneName) \
+            --set txtOwnerId=aks-external-dns
