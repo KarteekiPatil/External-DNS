@@ -6,7 +6,10 @@
         "value": "myAKSCluster"
       },
       "dnsPrefix": {
-        "value": "aksdns"
+        "value": "rgazuredns1.com"
+      },
+      "clientId": {
+        "value": "87003e51-60ad-4d85-8e01-98fb98c6b713"
       },
       "location": {
         "value": "eastasia"
