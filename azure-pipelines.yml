@@ -5,6 +5,7 @@ variables:
   resourceGroupName: 'DNS_ZONE_RG1'
   location: 'East Asia'
   aksClusterName: 'myAKSCluster'
+  tenantId : '438ec686-85a2-42e0-9a71-0bfc236adee6'
   dnsZoneName: 'rgazuredns1.com'
   dnsZoneResourceGroup: 'DNS_ZONE_RG'
   clientId: '87003e51-60ad-4d85-8e01-98fb98c6b713'
@@ -38,7 +39,7 @@ stages:
           helm repo update
 
           # Install External DNS
-          helm install external-dns-demo12 bitnami/external-dns \
+          helm install external-dns-demo-pipe bitnami/external-dns \
             --set provider=azure \
             --set azure.resourceGroup=$(dnsZoneResourceGroup) \
             --set azure.subscriptionId=$(subscriptionId) \
