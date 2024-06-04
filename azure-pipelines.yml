@@ -26,7 +26,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az group create --name $(resourceGroupName) --location $(location)
-          az deployment group create --resource-group $(resourceGroupName) --template-file main.bicep --parameters aksClusterName=$(aksClusterName) dnsZoneName=$(dnsZoneName) dnsZoneResourceGroup=$(dnsZoneResourceGroup) clientId=$(clientId) clientSecret=$(clientSecret) sshRSAPublicKey=$(sshRSAPublicKey)
+          az deployment group create --resource-group $(resourceGroupName) --template-file akscluster.bicep --parameters aksClusterName=$(aksClusterName) dnsZoneName=$(dnsZoneName) dnsZoneResourceGroup=$(dnsZoneResourceGroup) clientId=$(clientId) clientSecret=$(clientSecret) sshRSAPublicKey=$(sshRSAPublicKey)
 
 - stage: DeployExternalDNS
   dependsOn: DeployInfrastructure
