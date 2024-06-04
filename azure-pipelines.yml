@@ -31,8 +31,6 @@ stages:
   dependsOn: DeployInfrastructure
   jobs:
   - job: InstallExternalDNS
-    pool:
-       name: 'Default'
     steps:
     - task: AzureCLI@2
       inputs:
