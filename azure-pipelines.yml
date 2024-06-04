@@ -26,7 +26,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az group create --name $(resourceGroupName) --location $(location)
-          az deployment group create --resource-group $(resourceGroupName) --template-file akscluster.bicep --parameters aksClusterName=$(aksClusterName) dnsZoneName=$(dnsZoneName) dnsZoneResourceGroup=$(dnsZoneResourceGroup) clientId=$(clientId) clientSecret=$(secrets.cliensecret) sshRSAPublicKey=$(sshRSAPublicKey)
+          az deployment group create --resource-group $(resourceGroupName) --template-file akscluster.bicep --parameters aksClusterName=$(aksClusterName) dnsZoneName=$(dnsZoneName) dnsZoneResourceGroup=$(dnsZoneResourceGroup) clientId=$(clientId) clientSecret=$(secrets.clientsecret) sshRSAPublicKey=$(sshRSAPublicKey)
           
           # Get AKS credentials
           az aks get-credentials --resource-group $(resourceGroupName) --name $(aksClusterName)
@@ -45,6 +45,6 @@ stages:
             --set azure.subscriptionId=$(azureSubscription) \
             --set azure.tenantId=$(tenantId) \
             --set azure.clientId=$(clientId) \
-            --set azure.clientSecret=$(secrets.cliensecret)\
+            --set azure.clientSecret=$(secrets.clientsecret)\
             --set domainFilters[0]=$(dnsZoneName) \
             --set txtOwnerId=aks-external-dns
