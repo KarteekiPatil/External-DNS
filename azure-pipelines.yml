@@ -20,7 +20,7 @@ stages:
     steps:
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'Azure-Demo'
+        azureSubscription: 'External-DNS-Demo'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
