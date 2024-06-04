@@ -17,7 +17,7 @@ stages:
   jobs:
   - job: DeployResources
     pool:
-       name: 'Default'
+      name: 'Default'
     steps:
     - task: AzureCLI@2
       inputs:
