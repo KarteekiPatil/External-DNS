@@ -42,7 +42,7 @@ stages:
           helm install external-dns-demo-pipe bitnami/external-dns \
             --set provider=azure \
             --set azure.resourceGroup=$(dnsZoneResourceGroup) \
-            --set azure.subscriptionId=$(subscriptionId) \
+            --set azure.subscriptionId=$(azureSubscription) \
             --set azure.tenantId=$(tenantId) \
             --set azure.clientId=$(clientId) \
             --set azure.clientSecret=$(clientSecret) \
