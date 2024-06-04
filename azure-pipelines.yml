@@ -8,7 +8,7 @@ variables:
   dnsZoneName: 'rgazuredns1.com'
   dnsZoneResourceGroup: 'DNS_ZONE_RG'
   clientId: '87003e51-60ad-4d85-8e01-98fb98c6b713'
-  clientSecret: '${{CLIENTSECRET}}'
+  clientSecret: '$(CLIENTSECRET)'
   sshRSAPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDwxDuczzJdgrI4liRcHDiiY4PwSSwKfgf5GABDYrFpsk0rhhMgneY6O6R43wATxkVX9zaPIh7/CB33y8Y06+XzVtQ5QENCTS13Wkl9fcYWYe7vzMIVq7lJp87CbOfrkzEQKqaaavpiI6V+B4z2ccrUD/0zeu8z7T2DdvibM/VqtjXTPpIbKvA1coJrHFnOlmzQ63fOEHOOY+iOpxaHeQ0Ycc7kCdtjbqyy65JouOBye9zyI9+NnBtfUfvBUD1U1AbkKaa2r37YyeiatNlh7qtmHvED8puv3mJXIOnkuwKwCixF1yPQuwzVzHouoPcFEC+C+KCLYYEYPbsA/4pL30OjP4duCGIDO55A5bs7+JNMg98IX8+A8mHS5akbsQLGP98H8QupI91UAORclylIdznyIzWzX7EUdlzuEAOt+TX3+FYkfv5RY/Co5+W1AiQ5PIjOWctwZdVV/Bajb9GrspWihKXKm4ZvgqHVTH9JjglkuIHqZVAE0MV1O/mjQ2VRu89zMXKJS6iTUQ5+8uguAdE9Lmi9CaP2XK2OyBu8dEUpHt1AtrJ1MSfeZv1TE+AYySpUem4PgUjMdamxrXBEvaOWt58n+lVs0xNxPFcP5DoJ6jevdJZUKQLjg/dpPUkyaPPa/UQIcGZO9KMeEGrLJerQxPk4JxC3VzSCPMdXrF2wiQ== ardianet\kpatil2@L-INE-DVQCQG3'
   azureSubscription: '22ebdf17-ad01-4f71-a895-cb078a581d15'
 pool:
