@@ -17,7 +17,7 @@ pool:
 stages:
 - stage: DeployInfrastructure
   jobs:
-  - job: DeployResources
+  - job: Deploy AKS DNS Resources
     steps:
     - task: AzureCLI@2
       inputs:
