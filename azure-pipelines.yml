@@ -26,18 +26,7 @@ stages:
         inlineScript: |
           az group create --name $(resourceGroupName) --location $(location)
           az deployment group create --resource-group $(resourceGroupName) --template-file akscluster.bicep --parameters aksClusterName=$(aksClusterName) dnsZoneName=$(dnsZoneName) dnsZoneResourceGroup=$(dnsZoneResourceGroup) clientId=$(clientId) clientSecret=$(clientSecret) sshRSAPublicKey=$(sshRSAPublicKey)
-
-- stage: DeployExternalDNS
-  dependsOn: DeployInfrastructure
-  jobs:
-  - job: InstallExternalDNS
-    steps:
-    - task: AzureCLI@2
-      inputs:
-        azureSubscription:'Azure-Demo'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
+          
           # Get AKS credentials
           az aks get-credentials --resource-group $(resourceGroupName) --name $(aksClusterName)
 
