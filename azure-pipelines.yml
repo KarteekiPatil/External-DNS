@@ -3,7 +3,7 @@ trigger:
 
 variables:
   resourceGroupName: 'DNS_ZONE_RG1'
-  location: 'East Asia'
+  location: 'eastasia'
   aksClusterName: 'myAKSCluster'
   tenantId : '438ec686-85a2-42e0-9a71-0bfc236adee6'
   dnsZoneName: 'rgazuredns1.com'
